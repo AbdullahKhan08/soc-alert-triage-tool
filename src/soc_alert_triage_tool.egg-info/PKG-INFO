@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: soc-alert-triage-tool
+Version: 0.1.0
+Summary: A Python CLI tool for normalizing security alerts, calculating risk scores, and generating SOC triage reports.
+Requires-Python: >=3.10
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"

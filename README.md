@@ -55,19 +55,35 @@ The tool supports human-readable CLI output, Markdown triage reports, and machin
 
 Detailed design documents are available in the [`docs`](./docs) directory.
 
+For setup instructions and command examples, see the [Usage Guide](docs/usage.md).
+
+## Example Output
+
+### High-Risk PowerShell Triage
+
+![PowerShell Triage Output](docs/screenshots/powershell-triage.png)
+
+### Failed Logon Burst Correlation
+
+![Failed Logon Burst Output](docs/screenshots/failed-logon-burst.png)
+
+### Continuous Integration
+
+![GitHub Actions Success](docs/screenshots/github-actions-success.png)
+
+## Project Status
+
 ## Project Status
 
 - [x] Project architecture defined
 - [x] Alert data model implemented
 - [x] Wazuh JSON normalizer implemented
-- [x] Initial detection and scoring engine implemented
+- [x] Multi-scenario detection and scoring engine implemented
 - [x] Markdown report generator implemented
-- [x] CLI workflow implemented
-- [x] Unit tests added
-- [x] Multi-scenario Wazuh detection support implemented
-- [x] Batch alert triage implemented
+- [x] Single-alert and batch CLI workflows implemented
 - [x] Failed network logon burst correlation implemented
-- [x] GitHub Actions CI added
-- [x] Positive and negative detection tests added
 - [x] Machine-readable JSON output implemented
-- [x] Batch triage JSON output implemented
+- [x] Positive and negative detection tests added
+- [x] Local validation command added
+- [x] GitHub Actions CI added
+- [x] Usage documentation and evidence screenshots added
