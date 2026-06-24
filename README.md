@@ -56,8 +56,8 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 - [x] Project architecture defined
 - [x] Alert data model implemented
 - [x] Wazuh JSON normalizer implemented
-- [ ] Detection and scoring engine implemented
+- [x] Initial detection and scoring engine implemented
 - [ ] Markdown report generator implemented
-- [ ] CLI workflow implemented
-- [ ] Unit tests added
+- [x] CLI workflow implemented
+- [x] Unit tests added
 - [ ] GitHub Actions CI added
