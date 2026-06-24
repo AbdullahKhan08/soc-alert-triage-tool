@@ -6,6 +6,7 @@ from pathlib import Path
 from soc_triage.detections import Finding
 from soc_triage.models import NormalizedAlert
 from soc_triage.scoring import RiskAssessment
+from soc_triage.batch import CorrelatedFinding, TriageRecord
 
 
 def _value_or_unknown(value: str | None) -> str:
@@ -105,3 +106,59 @@ def write_markdown_report(content: str, output_path: Path) -> None:
     """Write a Markdown report to disk, creating parent folders when required."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(content, encoding="utf-8")
+    
+def generate_batch_markdown_report(
+    records: list[TriageRecord],
+    correlated_findings: list[CorrelatedFinding],
+) -> str:
+    """Generate a prioritized Markdown report for a batch of alerts."""
+    lines = [
+        "# SOC Batch Triage Report",
+        "",
+        "## Alert Queue",
+        "",
+        "| Priority | Score | Host | Rule | Description | Source File |",
+        "|---|---:|---|---|---|---|",
+    ]
+
+    for record in records:
+        alert = record.alert
+        lines.append(
+            "| "
+            f"{record.assessment.priority} | "
+            f"{record.assessment.score}/100 | "
+            f"{_value_or_unknown(alert.hostname)} | "
+            f"{_value_or_unknown(alert.rule_id)} | "
+            f"{_value_or_unknown(alert.rule_description)} | "
+            f"`{record.source_file}` |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Correlated Findings",
+            "",
+        ]
+    )
+
+    if not correlated_findings:
+        lines.append("- No multi-alert correlation patterns matched.")
+    else:
+        for finding in correlated_findings:
+            lines.extend(
+                [
+                    f"### {finding.name}",
+                    "",
+                    f"- **Priority:** {finding.priority}",
+                    f"- **Score:** {finding.score}/100",
+                    f"- **Description:** {finding.description}",
+                    "- **Related alerts:**",
+                ]
+            )
+
+            for source_file in finding.related_files:
+                lines.append(f"  - `{source_file}`")
+
+            lines.append("")
+
+    return "\n".join(lines)

@@ -1,0 +1,30 @@
+{
+  "@timestamp": "2026-06-22T12:06:00.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01"
+  },
+  "rule": {
+    "id": "60122",
+    "level": 5,
+    "description": "Logon failure - unknown user name or bad password.",
+    "groups": ["windows", "windows_security", "authentication_failed"]
+  },
+  "data": {
+    "win": {
+      "system": {
+        "channel": "Security",
+        "eventID": "4625",
+        "computer": "SOC-WIN11-01"
+      },
+      "eventdata": {
+        "targetUserName": "SOCLabFailTest",
+        "subjectUserName": "-",
+        "logonType": "3",
+        "status": "0xc000006d",
+        "subStatus": "0xc000006a",
+        "ipAddress": "192.168.64.50"
+      }
+    }
+  }
+}

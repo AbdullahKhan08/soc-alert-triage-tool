@@ -181,6 +181,23 @@ def detect_local_account_creation(alert: NormalizedAlert) -> list[Finding]:
 
     return []
 
+def detect_failed_network_logon(alert: NormalizedAlert) -> list[Finding]:
+    """Detect one failed Windows network logon event."""
+    if alert.event_id == "4625" and alert.logon_type == "3":
+        return [
+            Finding(
+                name="Failed network logon",
+                description=(
+                    "A failed network logon was observed. Review source IP, "
+                    "target account, failure status, and related attempts."
+                ),
+                points=10,
+                category="authentication",
+            )
+        ]
+
+    return []
+
 
 def run_detection_rules(alert: NormalizedAlert) -> list[Finding]:
     """Run all current detection rules against a normalized alert."""
@@ -194,6 +211,7 @@ def run_detection_rules(alert: NormalizedAlert) -> list[Finding]:
         detect_scheduled_task_registration,
         detect_startup_folder_file_creation,
         detect_local_account_creation,
+        detect_failed_network_logon,
         detect_high_source_severity,
     )
     

@@ -61,4 +61,6 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 - [x] CLI workflow implemented
 - [x] Unit tests added
 - [x] Multi-scenario Wazuh detection support implemented
+- [x] Batch alert triage implemented
+- [x] Failed network logon burst correlation implemented
 - [ ] GitHub Actions CI added
