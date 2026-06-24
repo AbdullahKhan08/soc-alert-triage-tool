@@ -1,0 +1,36 @@
+{
+  "@timestamp": "2026-06-21T19:52:10.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01",
+    "ip": "192.168.64.2"
+  },
+  "rule": {
+    "id": "100101",
+    "level": 10,
+    "description": "Custom Detection: Suspicious PowerShell execution parameter detected.",
+    "groups": ["powershell", "suspicious_command", "execution"],
+    "mitre": {
+      "id": ["T1059.001"],
+      "tactic": ["Execution"],
+      "technique": ["PowerShell"]
+    }
+  },
+  "data": {
+    "win": {
+      "system": {
+        "channel": "Microsoft-Windows-Sysmon/Operational",
+        "eventID": "1",
+        "computer": "SOC-WIN11-01"
+      },
+      "eventdata": {
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandLine": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Get-Date\"",
+        "parentImage": "C:\\Windows\\System32\\cmd.exe",
+        "parentCommandLine": "cmd.exe /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Get-Date\"",
+        "user": "SOC-WIN11-01\\socanalyst",
+        "hashes": "SHA256=example-lab-hash-not-real"
+      }
+    }
+  }
+}

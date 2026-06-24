@@ -54,8 +54,8 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 ## Project Status
 
 - [x] Project architecture defined
-- [ ] Alert data model implemented
-- [ ] Wazuh JSON normalizer implemented
+- [x] Alert data model implemented
+- [x] Wazuh JSON normalizer implemented
 - [ ] Detection and scoring engine implemented
 - [ ] Markdown report generator implemented
 - [ ] CLI workflow implemented
