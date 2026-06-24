@@ -6,19 +6,26 @@ from pathlib import Path
 
 from soc_triage.detections import run_detection_rules
 from soc_triage.normalizer import normalize_wazuh_alert
+from soc_triage.report_generator import generate_markdown_report, write_markdown_report
 from soc_triage.scoring import assess_risk
 
 
 def main() -> None:
     """Run the SOC Alert Triage Tool command-line interface."""
     parser = argparse.ArgumentParser(
-        description="Normalize, detect, and score Wazuh security alert exports."
+        description="Normalize, detect, score, and report Wazuh security alerts."
     )
 
     parser.add_argument(
         "input_file",
         type=Path,
         help="Path to a Wazuh JSON alert file.",
+    )
+
+    parser.add_argument(
+        "--report",
+        type=Path,
+        help="Optional output path for a Markdown triage report.",
     )
 
     args = parser.parse_args()
@@ -64,6 +71,11 @@ def main() -> None:
     print("-" * 60)
     for index, action in enumerate(assessment.recommended_actions, start=1):
         print(f"{index}. {action}")
+
+    if args.report:
+        report_content = generate_markdown_report(alert, findings, assessment)
+        write_markdown_report(report_content, args.report)
+        print(f"\nMarkdown report written to: {args.report}")
 
 
 if __name__ == "__main__":
