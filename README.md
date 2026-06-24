@@ -60,4 +60,5 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 - [x] Markdown report generator implemented
 - [x] CLI workflow implemented
 - [x] Unit tests added
+- [x] Multi-scenario Wazuh detection support implemented
 - [ ] GitHub Actions CI added

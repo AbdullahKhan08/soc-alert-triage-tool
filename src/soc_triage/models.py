@@ -24,6 +24,8 @@ class NormalizedAlert:
     hostname: str | None = None
     agent_id: str | None = None
     username: str | None = None
+    subject_username: str | None = None
+    target_username: str | None = None
 
     event_id: str | None = None
     channel: str | None = None
@@ -34,8 +36,13 @@ class NormalizedAlert:
     parent_command_line: str | None = None
 
     file_path: str | None = None
+    task_name: str | None = None
+
     source_ip: str | None = None
     destination_ip: str | None = None
+    logon_type: str | None = None
+    status: str | None = None
+    sub_status: str | None = None
 
     mitre_ids: list[str] = field(default_factory=list)
     mitre_tactics: list[str] = field(default_factory=list)

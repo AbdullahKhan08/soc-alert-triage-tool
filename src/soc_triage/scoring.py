@@ -49,6 +49,16 @@ def build_recommended_actions(findings: list[Finding]) -> list[str]:
         actions.append(
             "Trace the full process ancestry and identify the initiating process."
         )
+        
+    if "persistence" in categories:
+        actions.append(
+            "Review the persistence mechanism, creator context, and whether it is approved."
+        )
+
+    if "account_management" in categories:
+        actions.append(
+            "Review the created account, group memberships, and any subsequent logon activity."
+        )    
 
     if "source_severity" in categories:
         actions.append(

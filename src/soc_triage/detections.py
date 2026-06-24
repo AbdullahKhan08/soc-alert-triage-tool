@@ -119,6 +119,68 @@ def detect_high_source_severity(alert: NormalizedAlert) -> list[Finding]:
 
     return []
 
+def detect_scheduled_task_registration(alert: NormalizedAlert) -> list[Finding]:
+    """Detect Windows scheduled task registration activity."""
+    is_task_event = (
+        alert.event_id == "106"
+        and alert.channel == "Microsoft-Windows-TaskScheduler/Operational"
+    )
+
+    if is_task_event:
+        return [
+            Finding(
+                name="Scheduled task registration",
+                description=(
+                    f"A scheduled task was registered: {alert.task_name or 'unknown task'}."
+                ),
+                points=30,
+                category="persistence",
+            )
+        ]
+
+    return []
+
+
+def detect_startup_folder_file_creation(alert: NormalizedAlert) -> list[Finding]:
+    """Detect file creation in the Windows Startup folder."""
+    file_path = (alert.file_path or "").lower()
+    startup_folder = (
+        "c:\\programdata\\microsoft\\windows\\start menu\\programs\\startup\\"
+    )
+
+    if file_path.startswith(startup_folder):
+        return [
+            Finding(
+                name="Windows Startup folder file creation",
+                description=(
+                    "A file was added to the Windows Startup folder, which is a "
+                    "persistence-relevant location."
+                ),
+                points=35,
+                category="persistence",
+            )
+        ]
+
+    return []
+
+
+def detect_local_account_creation(alert: NormalizedAlert) -> list[Finding]:
+    """Detect Windows Security Event ID 4720 local account creation."""
+    if alert.event_id == "4720":
+        return [
+            Finding(
+                name="Local account creation",
+                description=(
+                    "A local user account was created: "
+                    f"{alert.target_username or 'unknown account'}."
+                ),
+                points=45,
+                category="account_management",
+            )
+        ]
+
+    return []
+
 
 def run_detection_rules(alert: NormalizedAlert) -> list[Finding]:
     """Run all current detection rules against a normalized alert."""
@@ -129,9 +191,12 @@ def run_detection_rules(alert: NormalizedAlert) -> list[Finding]:
         detect_execution_policy_bypass,
         detect_encoded_powershell,
         detect_cmd_to_powershell_chain,
+        detect_scheduled_task_registration,
+        detect_startup_folder_file_creation,
+        detect_local_account_creation,
         detect_high_source_severity,
     )
-
+    
     for detector in detectors:
         findings.extend(detector(alert))
 

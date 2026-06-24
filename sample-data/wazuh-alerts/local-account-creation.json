@@ -1,0 +1,31 @@
+{
+  "@timestamp": "2026-06-22T10:45:00.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01"
+  },
+  "rule": {
+    "id": "100104",
+    "level": 10,
+    "description": "Custom Detection: Local user account created on Windows endpoint.",
+    "groups": ["account_management", "persistence", "local_account"],
+    "mitre": {
+      "id": ["T1098"],
+      "tactic": ["Persistence"],
+      "technique": ["Account Manipulation"]
+    }
+  },
+  "data": {
+    "win": {
+      "system": {
+        "channel": "Security",
+        "eventID": "4720",
+        "computer": "SOC-WIN11-01"
+      },
+      "eventdata": {
+        "targetUserName": "SOCLabExampleUser",
+        "subjectUserName": "socanalyst"
+      }
+    }
+  }
+}

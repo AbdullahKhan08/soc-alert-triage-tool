@@ -1,0 +1,23 @@
+{
+  "@timestamp": "2026-06-22T10:30:00.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01"
+  },
+  "rule": {
+    "id": "100103",
+    "level": 9,
+    "description": "Custom Detection: File added to Windows Startup folder.",
+    "groups": ["fim", "persistence", "startup_folder"],
+    "mitre": {
+      "id": ["T1547.001"],
+      "tactic": ["Persistence", "Privilege Escalation"],
+      "technique": ["Registry Run Keys / Startup Folder"]
+    }
+  },
+  "data": {
+    "syscheck": {
+      "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SOC-Lab-Example.txt"
+    }
+  }
+}

@@ -32,3 +32,18 @@ def test_normalize_wazuh_powershell_alert() -> None:
     assert "-ExecutionPolicy Bypass" in alert.command_line
     assert alert.parent_image == r"C:\Windows\System32\cmd.exe"
     assert alert.mitre_ids == ["T1059.001"]
+    
+def test_normalize_scheduled_task_alert() -> None:
+    fixture_path = (
+        Path(__file__).parent.parent
+        / "sample-data"
+        / "wazuh-alerts"
+        / "scheduled-task-registration.json"
+    )
+
+    with fixture_path.open("r", encoding="utf-8") as file:
+        alert = normalize_wazuh_alert(json.load(file))
+
+    assert alert.event_id == "106"
+    assert alert.task_name == "\\SOC-Lab-Task-Example"
+    assert alert.username == "SOC-WIN11-01\\socanalyst"

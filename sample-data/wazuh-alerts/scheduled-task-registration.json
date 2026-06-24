@@ -1,0 +1,31 @@
+{
+  "@timestamp": "2026-06-22T10:15:00.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01"
+  },
+  "rule": {
+    "id": "100102",
+    "level": 9,
+    "description": "Custom Detection: Scheduled task registered on Windows endpoint.",
+    "groups": ["scheduled_task", "persistence"],
+    "mitre": {
+      "id": ["T1053.005"],
+      "tactic": ["Persistence"],
+      "technique": ["Scheduled Task/Job: Scheduled Task"]
+    }
+  },
+  "data": {
+    "win": {
+      "system": {
+        "channel": "Microsoft-Windows-TaskScheduler/Operational",
+        "eventID": "106",
+        "computer": "SOC-WIN11-01"
+      },
+      "eventdata": {
+        "taskName": "\\SOC-Lab-Task-Example",
+        "userContext": "SOC-WIN11-01\\socanalyst"
+      }
+    }
+  }
+}
