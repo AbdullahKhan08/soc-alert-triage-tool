@@ -2,6 +2,8 @@
 
 A Python-based SOC analyst utility that normalizes security alerts, identifies suspicious indicators, calculates transparent risk scores, and generates Markdown triage reports.
 
+[![Python Tests](https://github.com/AbdullahKhan08/soc-alert-triage-tool/actions/workflows/tests.yml/badge.svg)](https://github.com/AbdullahKhan08/soc-alert-triage-tool/actions/workflows/tests.yml)
+
 ## Project Goal
 
 Security analysts often receive alerts from multiple data sources with inconsistent fields and varying severity. This project builds a repeatable triage workflow that:
@@ -63,4 +65,5 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 - [x] Multi-scenario Wazuh detection support implemented
 - [x] Batch alert triage implemented
 - [x] Failed network logon burst correlation implemented
-- [ ] GitHub Actions CI added
+- [x] GitHub Actions CI added
+- [x] Positive and negative detection tests added

@@ -33,3 +33,13 @@ def test_powershell_bypass_assessment_is_high_priority() -> None:
     assert assessment.score == 85
     assert assessment.priority == "High"
     assert len(assessment.recommended_actions) >= 3
+    
+def test_benign_powershell_activity_is_informational() -> None:
+    findings = [
+        Finding("PowerShell execution", "Test", 15, "execution"),
+    ]
+
+    assessment = assess_risk(findings)
+
+    assert assessment.score == 15
+    assert assessment.priority == "Informational"

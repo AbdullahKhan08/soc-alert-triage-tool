@@ -99,3 +99,19 @@ def test_failed_network_logon_generates_authentication_finding() -> None:
     names = {finding.name for finding in findings}
 
     assert "Failed network logon" in names
+    
+def test_benign_powershell_fixture_does_not_over_alert() -> None:
+    fixture_path = (
+        Path(__file__).parent.parent
+        / "sample-data"
+        / "wazuh-alerts"
+        / "benign-powershell.json"
+    )
+
+    with fixture_path.open("r", encoding="utf-8") as file:
+        alert = normalize_wazuh_alert(json.load(file))
+
+    findings = run_detection_rules(alert)
+    names = {finding.name for finding in findings}
+
+    assert names == {"PowerShell execution"}

@@ -1,0 +1,29 @@
+{
+  "@timestamp": "2026-06-22T14:00:00.000Z",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11-01"
+  },
+  "rule": {
+    "id": "100100",
+    "level": 3,
+    "description": "PowerShell process creation observed.",
+    "groups": ["powershell", "process_creation"]
+  },
+  "data": {
+    "win": {
+      "system": {
+        "channel": "Microsoft-Windows-Sysmon/Operational",
+        "eventID": "1",
+        "computer": "SOC-WIN11-01"
+      },
+      "eventdata": {
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandLine": "powershell.exe -NoProfile -Command \"Get-Date\"",
+        "parentImage": "C:\\Windows\\explorer.exe",
+        "parentCommandLine": "C:\\Windows\\explorer.exe",
+        "user": "SOC-WIN11-01\\socanalyst"
+      }
+    }
+  }
+}

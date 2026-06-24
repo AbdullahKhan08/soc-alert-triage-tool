@@ -17,6 +17,12 @@ Each finding is independent and explainable.
 
 The tool does not label an alert as malicious based on one keyword. It combines multiple signals and provides the exact evidence contributing to the final risk score.
 
+## Negative Testing
+
+The project includes benign fixtures to verify that common administrative activity is not automatically escalated.
+
+For example, a normal PowerShell `Get-Date` command launched by `explorer.exe` should remain Informational unless additional suspicious indicators are present.
+
 ## Current Limitation
 
 The initial rules focus on a Wazuh Sysmon-style PowerShell alert fixture.
