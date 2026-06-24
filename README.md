@@ -51,6 +51,8 @@ Triage Recommendation
 Markdown Report
 ```
 
+The tool supports human-readable CLI output, Markdown triage reports, and machine-readable JSON output for future automation or dashboard integrations.
+
 Detailed design documents are available in the [`docs`](./docs) directory.
 
 ## Project Status
@@ -67,3 +69,5 @@ Detailed design documents are available in the [`docs`](./docs) directory.
 - [x] Failed network logon burst correlation implemented
 - [x] GitHub Actions CI added
 - [x] Positive and negative detection tests added
+- [x] Machine-readable JSON output implemented
+- [x] Batch triage JSON output implemented
